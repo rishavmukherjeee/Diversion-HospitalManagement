@@ -1,10 +1,9 @@
 "use client"
-import React,{useState} from 'react';
+import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const App = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
   return (
     <div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12"
      style={{backgroundImage: "url('/protrudingsquares.svg')",   }}>
@@ -37,21 +36,21 @@ const App = () => {
             </div>
             <div className="divide-y divide-gray-200">
               <div className="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
-                <div className="flex flex-col">
-                  <label className="leading-loose">UserID</label>
-                  <input type="text" className="px-4 py-2 border 
-                  focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300
-                   rounded-md focus:outline-none text-gray-600" placeholder="Email/UserID" />
-                </div>
-                <div className="flex flex-col">
-                  <label className="leading-loose">Password</label>
-                  <input type="password" onChange={(e)=>setPassword(e.target.value)}
-                  className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" placeholder="Password" />
-                </div>
+                
               </div>
               <div className="pt-4 flex items-center space-x-4">
-                  <button className="flex justify-center items-center w-full text-white px-4 py-3 rounded-md focus:outline-none bg-blue-500 hover:bg-blue-600 hover:shadow-lg">Log in</button>
-                  <button className="flex justify-center items-center w-full text-white px-4 py-3 rounded-md focus:outline-none bg-blue-500 hover:bg-blue-600 hover:shadow-lg">Sign up</button>
+                <Link className="flex justify-center items-center w-full text-white px-4 py-3 
+                  rounded-md focus:outline-none bg-green-500 hover:bg-green-700 hover:shadow-lg"
+                  href='/auth/login'>
+                  <button >Log in</button>
+                  </Link>
+                   <Link 
+                  className="flex justify-center items-center w-full text-white px-4 py-3
+                   rounded-md focus:outline-none bg-red-500 hover:bg-red-700 hover:shadow-lg"
+                    href="/auth/sign"> 
+                   <button >Sign up</button>
+
+                  </Link>
               </div>
             </div>
           </div>
