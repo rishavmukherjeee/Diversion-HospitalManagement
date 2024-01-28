@@ -9,13 +9,13 @@ const App = () => {
      style={{backgroundImage: "url('/protrudingsquares.svg')",   }}>
       <div className="relative py-3 sm:max-w-xl sm:mx-auto">
               <div className="block pl-2 font-semibold text-xl self-start text-gray-700  ">
-        <div className="relative px-4 py-10 bg-white mx-8 md:mx-0 shadow rounded-3xl sm:p-10">
+        <div className="relative px-4 py-10 hover:shadow-2xl bg-white mx-8 md:mx-0 shadow rounded-3xl sm:p-10">
           <div className="max-w-md mx-auto">
               
                 <div className="flex flex-row  justify-center  pb-3">
                 
                 <Image
-                className="rounded-full"
+                className="rounded-full hover:shadow-lg"
                 src="/logo.svg"
                 alt="logo"
                 width={150}
