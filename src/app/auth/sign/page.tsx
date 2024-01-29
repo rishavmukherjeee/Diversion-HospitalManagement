@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 
 async function sign(name:string, email:string, password:string){
+  
   const response = await fetch('http://localhost:3000/api/auth/signin', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -23,8 +24,8 @@ export default function Signin() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = async(e) => {
-    e.preventDefault();
+  const handleSubmit = async() => {
+    
     try {
       const data = await sign(name, email, password);
       console.log(data);
