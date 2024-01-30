@@ -1,15 +1,16 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { PrismaClient } from '@prisma/client'
 
-let prisma: PrismaClient;
-declare global {
-  var prisma: PrismaClient | undefined
-}
-if (!global.prisma) {
-  global.prisma = new PrismaClient();
+const prismaClientSingleton = () => {
+  return new PrismaClient()
 }
 
-prisma = global.prisma;
+declare global {
+  var prisma: undefined | ReturnType<typeof prismaClientSingleton>
+}
+
+const prisma = prismaClientSingleton()
+
 
 export default async function databaseCheck( req: NextApiRequest,res: NextApiResponse) {
   try {

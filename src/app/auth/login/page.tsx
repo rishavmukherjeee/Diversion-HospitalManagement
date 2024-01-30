@@ -1,5 +1,5 @@
 "use client"
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import {useRouter}from 'next/navigation';
 async function log( email:string, password:string){
@@ -23,11 +23,15 @@ async function log( email:string, password:string){
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false); // [1]
   const router = useRouter();
+  
   const handleSubmit = async(e:any) => {
     e.preventDefault();
     try {
+      setLoading(true);
       const data = await log(email,  password);
+      setLoading(false);
       localStorage.setItem('token', data.token);
       router.push('/home/dashboard');
       console.log(data);
@@ -37,8 +41,14 @@ export default function Login() {
 
 
   };
-
+    if(loading){
+      return (
+      <div className="flex items-center justify-center">
+      <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900"></div>
+    </div>);}
+    else{
   return (
+
     <div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12"
      style={{backgroundImage: "url('/protrudingsquares.svg')",   }}>
       
@@ -79,4 +89,5 @@ export default function Login() {
       </div>
     </div>
   );
+    }
 }
