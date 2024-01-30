@@ -24,16 +24,16 @@ model Patient {
   id               String    @id @default(auto()) @map("_id") @db.ObjectId
   user             User?     @relation(fields: [id], references: [id])
   name             String
-  details          String
-  address          String
-  bednumber        String
-  appointedNurseId String    @db.ObjectId
-  appointedNurse   Nurse     @relation(fields: [appointedNurseId], references: [id])
-  appointedDoctor  String
-  diet             String
-  drugsPrescribed  String
-  ereports         String
-  vitalsLastCheck  String
+  details          String?
+  address          String?
+  bednumber        String?
+  appointedNurseId String?   @db.ObjectId
+  appointedNurse   Nurse?    @relation(fields: [appointedNurseId], references: [id])
+  appointedDoctor  String?
+  diet             String?
+  drugsPrescribed  String?
+  ereports         String?
+  vitalsLastCheck  String?
   files            String[]
   Hospital         Hospital? @relation(fields: [hospitalId], references: [id])
   hospitalId       String?   @db.ObjectId
@@ -42,37 +42,34 @@ model Patient {
 model Nurse {
   id                String    @id @default(auto()) @map("_id") @db.ObjectId
   user              User?     @relation(fields: [id], references: [id])
-  name              String
-  email             String    @unique
-  password          String
-  role              String
+  name              String?
   appointedPatients Patient[]
   Hospital          Hospital? @relation(fields: [hospitalId], references: [id])
   hospitalId        String?   @db.ObjectId
 }
 
 model Medicine {
-  id         String   @id @default(auto()) @map("_id") @db.ObjectId
-  name       String
-  quantity   Int
-  retailerId String   @db.ObjectId
-  retailer   Retailer @relation(fields: [retailerId], references: [id])
+  id         String    @id @default(auto()) @map("_id") @db.ObjectId
+  name       String?
+  quantity   Int?
+  retailerId String?   @db.ObjectId
+  retailer   Retailer? @relation(fields: [retailerId], references: [id])
 }
 
 model Retailer {
   id        String     @id @default(auto()) @map("_id") @db.ObjectId
   user      User?      @relation(fields: [id], references: [id])
-  name      String
+  name      String?
   medicines Medicine[]
-  location  String
+  location  String?
   Shop      Shop?      @relation(fields: [shopId], references: [id])
   shopId    String?    @db.ObjectId
 }
 
 model Hospital {
   id       String    @id @default(auto()) @map("_id") @db.ObjectId
-  name     String
-  location String
+  name     String?
+  location String?
   patients Patient[]
   nurses   Nurse[]
 }

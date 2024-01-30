@@ -34,6 +34,48 @@ export default async function signin(req:NextApiRequest, res:NextApiResponse) {
             password: hashedPassword,
         },
     });
+        if(role=="patient"){
+            const newPatient = await prisma.patient.create({
+                data: {
+                    name: name,
+                    user: {
+                        connect: {
+                            id: newUser.id,
+                        },
+                    },
+
+                },
+            });
+            console.log(newPatient);
+        }
+        else if(role=="nurse"){
+            const newNurse = await prisma.nurse.create({
+                data: {
+                    name: name,
+                    user: {
+                        connect: {
+                            id: newUser.id,
+                        },
+                    },
+
+                },
+            });
+            console.log(newNurse);
+        }
+        else if(role=="retailer"){
+            const newRetailer = await prisma.retailer.create({
+                data: {
+                    name: name,
+                    user: {
+                        connect: {
+                            id: newUser.id,
+                        },
+                    },
+
+                },
+            });
+            console.log(newRetailer);
+        }
     const secret = process.env.DB_SECRET as string;
     const token = jwt.sign({ userId: newUser.id,name:name, email:email, role:role }, secret, {
         expiresIn: '30d',
