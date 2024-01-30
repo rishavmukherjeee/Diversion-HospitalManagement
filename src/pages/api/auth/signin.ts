@@ -35,7 +35,7 @@ export default async function signin(req:NextApiRequest, res:NextApiResponse) {
         },
     });
     const secret = process.env.DB_SECRET as string;
-    const token = jwt.sign({ userId: newUser.id }, secret, {
+    const token = jwt.sign({ userId: newUser.id,name:name, email:email, role:role }, secret, {
         expiresIn: '30d',
     });
     res.json({ token });
