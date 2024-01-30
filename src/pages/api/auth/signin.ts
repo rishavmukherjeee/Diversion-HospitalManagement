@@ -14,11 +14,8 @@ export default async function signin(req:NextApiRequest, res:NextApiResponse) {
         return res.status(405).json({ message: 'Method not allowed' });
     }
     try{
-        console.log("fromserver",req.body);
-    const db=await prisma.$connect().then(()=>{
-        console.log("db connected");
-    });
-    const { name, email, password } = req.body;
+    
+    const { name, email,role, password } = req.body;
     const user = await prisma.user.findFirst({
         where: {
             email: email,
@@ -34,10 +31,12 @@ export default async function signin(req:NextApiRequest, res:NextApiResponse) {
         data: {
             name: name,
             email: email,
+            role: role,
             password: hashedPassword,
         },
     });
-    const token = jwt.sign({ userId: newUser.id }, process.env.NEXT_PUBLIC_JWT_SECRET||"secrett6", {
+    const secret = process.env.DB_SECRET as string;
+    const token = jwt.sign({ userId: newUser.id }, secret, {
         expiresIn: '30d',
     });
     res.json({ token });

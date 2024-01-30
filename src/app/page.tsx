@@ -1,9 +1,39 @@
 "use client"
-import React from 'react';
+import React, { useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+const db =async()=>{
+  try{
+  const url=process.env.NEXT_PUBLIC_API_URL+'/api/db';
+  
+  console.log("Connecting database from url ",url);
+  const response = await fetch(url, {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+    
 
+});
+const data = await response.json();
+console.log(data);
+if (!response.ok) {
+    throw new Error(data.message || 'Something went wrong');
+} 
+
+return data;}
+catch(error){
+  console.log(error);}
+}
+  
 const App = () => {
+  const router = useRouter();
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      router.push('/home/dashboard');
+    }
+  }, []);
   return (
     <div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12"
      style={{backgroundImage: "url('/protrudingsquares.svg')",   }}>
@@ -42,13 +72,13 @@ const App = () => {
                 <Link className="flex justify-center items-center w-full text-white px-4 py-3 
                   rounded-md focus:outline-none bg-green-500 hover:bg-green-700 hover:shadow-lg"
                   href='/auth/login'>
-                  <button >Log in</button>
+                  <button onClick={db} >Log in</button>
                   </Link>
                    <Link 
                   className="flex justify-center items-center w-full text-white px-4 py-3
                    rounded-md focus:outline-none bg-red-500 hover:bg-red-700 hover:shadow-lg"
                     href="/auth/sign"> 
-                   <button >Sign up</button>
+                   <button onClick={db} >Sign up</button>
 
                   </Link>
               </div>

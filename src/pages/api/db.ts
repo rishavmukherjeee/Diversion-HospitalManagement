@@ -1,9 +1,17 @@
-/*import { NextApiRequest, NextApiResponse } from 'next'
+import { NextApiRequest, NextApiResponse } from 'next'
 import { PrismaClient } from '@prisma/client'
 
-const prisma = new PrismaClient()
+let prisma: PrismaClient;
+declare global {
+  var prisma: PrismaClient | undefined
+}
+if (!global.prisma) {
+  global.prisma = new PrismaClient();
+}
 
-export default async function databaseCheck(req: NextApiRequest, res: NextApiResponse) {
+prisma = global.prisma;
+
+export default async function databaseCheck( req: NextApiRequest,res: NextApiResponse) {
   try {
     await prisma.$connect().then(() => {
       res.status(200).json({ status: 'Database connected' })
@@ -14,4 +22,4 @@ export default async function databaseCheck(req: NextApiRequest, res: NextApiRes
     res.status(500).json({ status: 'Database connection failed' })
   } 
 }
-*/
+export { prisma};
