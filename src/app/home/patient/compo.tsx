@@ -1,5 +1,6 @@
 import React,{useState} from 'react'
 import jwt from 'jsonwebtoken';
+import Fileup from './fileup';
 const Compo = () => {
     
   let token:any ;
@@ -8,72 +9,78 @@ const Compo = () => {
     let decoded:any;
     decoded = jwt.decode(token);
     console.log(decoded?.userId);
-    const [patient, setPatient] = useState({
-        name: decoded?.userId,
-        details: '',
-        address: '',
-        bednumber: '',
-        diet: '',
-        drugsPrescribed: '',
-        files: [],
-      });
-      const handleChange = (event:any) => {
-        const { name, value, files } = event.target;
-        if (name === 'files') {
-          setPatient((prevState) => ({
-            ...prevState,
-            [name]: [...files],
-          }));
-        } else {
-          setPatient((prevState) => ({
-            ...prevState,
-            [name]: value,
-          }));
-        }
+    const [details, setDetails] = useState('');
+    const [drugsPrescribed, setDrugsPrescribed] = useState('');
+    const [address, setAddress] = useState('');
+    const [bednumber, setBednumber] = useState('');
+    const [diet, setDiet] = useState('');
+    const patient = {
+        details: details,
+        drugsPrescribed: drugsPrescribed,
+        address: address,
+        bednumber: bednumber,
+        diet: diet,
+        name:decoded?.name
       };
-      const handleSubmit = (event:any) => {
+      
+    const handleChange = (event:any) => {
+        const target = event.target;
+        const name = target.name;
+        if(name=='details')
+        setDetails(target.value);
+        if(name=='drugsPrescribed')
+        setDrugsPrescribed(target.value);
+        if(name=='address')
+        setAddress(target.value);
+        if(name=='bednumber')
+        setBednumber(target.value);
+        if(name=='diet')
+        setDiet(target.value);
+      }
+      const handleSubmit = async(event:any) => {
+
         event.preventDefault();
         alert(JSON.stringify(patient));
-        const url= process.env.NEXT_PUBLIC_API_URL + '/api/patient';
-        const res= fetch(url, {
+        const url= process.env.NEXT_PUBLIC_API_URL + '/api/controller/patient?id='+decoded?.userId
+        const res= await fetch(url, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
                 },
             body: JSON.stringify(patient),
         });
-
+        const data = await res.json();
+        console.log(data);
       };
   return (
     <div> 
         <form onSubmit={handleSubmit}>
     <label className='p-1 flex items-center'>
       Details:
-      <input placeholder='Details Here' className='ml-3 bg-transparent p-1' type="text" name="details" value={patient.details} onChange={handleChange} />
+      <input placeholder='Details Here' className='ml-3 bg-transparent p-1' type="text" name="details" value={details} onChange={handleChange} />
     </label>
     <label className='p-1 flex items-center'>
       Address:
-      <input placeholder='Address Here' className='ml-3 bg-transparent p-1' type="text" name="address" value={patient.address} onChange={handleChange} />
+      <input placeholder='Address Here' className='ml-3 bg-transparent p-1' type="text" name="address" value={address} onChange={handleChange} />
     </label>
     <label className='p-1 flex items-center'>
       Bed No.:
-      <input placeholder='Bed Number Here' className='ml-3 bg-transparent p-1' type="text" name="bednumber" value={patient.bednumber} onChange={handleChange} />
+      <input placeholder='Bed Number Here' className='ml-3 bg-transparent p-1' type="text" name="bednumber" value={bednumber} onChange={handleChange} />
     </label>
     <label className='p-1 flex items-center'>
       Diet:
-      <input placeholder='Diet Here' className='ml-3 bg-transparent p-1' type="text" name="diet" value={patient.diet} onChange={handleChange} />
+      <input placeholder='Diet Here' className='ml-3 bg-transparent p-1' type="text" name="diet" value={diet} onChange={handleChange} />
     </label>
     <label className='p-1 flex items-center'>
-      Drugs:
-      <input placeholder='Drugs Here' className='ml-3 bg-transparent p-1' type="text" name="drugsPrescribed" value={patient.drugsPrescribed} onChange={handleChange} />
+      Drugs Prescribed:
+      <input placeholder='Drugs Here' className='ml-3 bg-transparent p-1' type="text" name="drugsPrescribed" value={drugsPrescribed} onChange={handleChange} />
     </label>
-    <label className='p-1 flex items-center'>
-      Files:<input className='ml-3 bg-transparent p-1' type="file" multiple name="files" onChange={handleChange} />
-
-    </label>
-    <button className=" mt-16 px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700" type="submit">Submit</button>
-  </form></div>
+    <Fileup/>
+    <button className='bg-blue-500 mt-5 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
+    type="submit">Submit</button>
+    </form>
+    </div>
   )
 }
 
-export default Compo
+export default Compo;
