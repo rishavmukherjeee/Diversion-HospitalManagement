@@ -4,7 +4,7 @@ const Fileup = () => {
   const fileInputRef = useRef(null);
 
   const uploadFiles = async () => {
-    const files = fileInputRef.current.files;
+    const files = fileInputRef.current?.file;
     const formData = new FormData();
 
     for (let i = 0; i < files.length; i++) {

@@ -1,21 +1,7 @@
-/*import {prisma} from '../db';
-import { NextApiRequest, NextApiResponse } from 'next';
-import { IncomingForm, File } from 'formidable';
-import nextConnect from 'next-connect';
-const form = new IncomingForm();
-
-import cloudinary from 'cloudinary';
-import multer from 'multer';
-const your_api_key=process.env.DB_CLOUDINARY_KEY;
-const your_api_secret=process.env.DB_CLOUDINARY_SECRET;
-const your_cloud_name=process.env.DB_CLOUDINARY_NAME;
-cloudinary.v2.config({
-  cloud_name: your_cloud_name,
-  api_key: your_api_key,
-  api_secret: your_api_secret,
-});
 import { NextApiRequest, NextApiResponse } from 'next';
 import {nextConnect} from 'next-connect';
+import {prisma} from '../db';
+import { IncomingForm, File } from 'formidable';
 import cloudinary from 'cloudinary';
 import multer from 'multer';
 
@@ -48,4 +34,3 @@ const handler = nextConnect()
   });
 
 export default handler;
-*/
