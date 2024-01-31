@@ -1,17 +1,27 @@
 import React, { useRef } from 'react';
 
 const Fileup = () => {
-  const fileInputRef = useRef(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const uploadFiles = async () => {
-    const files = fileInputRef.current?.file;
+    if (!(fileInputRef.current instanceof HTMLInputElement)) {
+      console.error('Invalid ref');
+      return;
+    }
+  
+    const files = fileInputRef.current.files;
+    if (!files) {
+      console.error('No files selected');
+      return;
+    }
     const formData = new FormData();
-
+  
     for (let i = 0; i < files.length; i++) {
       formData.append('files', files[i]);
     }
 
     try {
+      console.log('Sending request to /api/controller/files');
       const response = await fetch('/api/controller/files', {
         method: 'POST',
         body: formData,
@@ -19,12 +29,12 @@ const Fileup = () => {
 
       if (response.ok) {
         const { urls } = await response.json();
-        console.log(urls);
+        console.log('Upload successful, received URLs:', urls);
       } else {
-        console.error('Upload failed');
+        console.error('Upload failed, response:', response);
       }
     } catch (error) {
-      console.error('Error:', error);
+      console.error('Error during fetch:', error);
     }
   };
 

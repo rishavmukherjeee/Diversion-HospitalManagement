@@ -22,7 +22,8 @@
     "next-connect": "^1.0.0",
     "react": "^18",
     "react-dom": "^18",
-    "react-spring": "^9.7.3"
+    "react-spring": "^9.7.3",
+    "stream": "^0.0.2"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
