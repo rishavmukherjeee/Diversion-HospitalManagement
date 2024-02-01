@@ -1,15 +1,17 @@
-import React, { useRef } from 'react';
+/*import React, { useRef } from 'react';
 
 const Fileup = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const uploadFiles = async () => {
+    console.log('Uploading files...');
     if (!(fileInputRef.current instanceof HTMLInputElement)) {
       console.error('Invalid ref');
       return;
     }
   
     const files = fileInputRef.current.files;
+    console.log(files);
     if (!files) {
       console.error('No files selected');
       return;
@@ -22,7 +24,7 @@ const Fileup = () => {
 
     try {
       console.log('Sending request to /api/controller/files');
-      const response = await fetch('/api/controller/files', {
+      const response = await fetch('/api/controller/filesupload', {
         method: 'POST',
         body: formData,
       });
@@ -55,3 +57,46 @@ const Fileup = () => {
 };
 
 export default Fileup;
+*/
+import { useState } from 'react';
+
+export default function HFileup() {
+  const [selectedFile, setSelectedFile] = useState();
+
+  const handleFileChange = (event) => {
+    setSelectedFile(event.target.files[0]);
+  };
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+
+    const formData = new FormData();
+    formData.append('file', selectedFile);
+    formData.append('upload_preset', 'YOUR_UPLOAD_PRESET');
+    try {
+      const response = await fetch('https://api.cloudinary.com/v1_1/dkcgowfwq/image/upload', {
+        method: 'POST',
+        body: formData,
+      });
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
+  
+
+    if (data.secure_url) {
+      console.log('File successfully uploaded to Cloudinary:', data.secure_url);
+    } else {
+      console.log('Upload failed');
+    }
+  };
+
+  return (<div>
+    <form onSubmit={handleFormSubmit}>
+      <input type="file" onChange={handleFileChange} />
+      <button type="submit">Upload</button>
+    </form>
+    </div>
+  );
+}
