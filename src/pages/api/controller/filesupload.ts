@@ -1,4 +1,4 @@
-import { NextApiRequest, NextApiResponse } from 'next';
+/*import { NextApiRequest, NextApiResponse } from 'next';
 import { v2 as cloudinary } from 'cloudinary';
 import multer from 'multer';
 import { Readable } from 'stream';
@@ -57,3 +57,4 @@ export default async function handler(req: NextApiRequestWithFiles, res: NextApi
     res.status(405).json({ error: 'Method not allowed' });
   }
 }
+*/
