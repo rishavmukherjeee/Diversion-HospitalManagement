@@ -4,13 +4,16 @@ import { useRouter } from 'next/navigation';
 export default function HFileup() {
   const [selectedFile, setSelectedFile] = useState();
   const router=useRouter();
-  const handleFileChange = (event) => {
+  const handleFileChange = (event:any) => {
     setSelectedFile(event.target.files[0]);
   };
 
-  const handleFormSubmit = async (event) => {
+  const handleFormSubmit = async (event:any) => {
     event.preventDefault();
-
+    if (!selectedFile) {
+      alert('Please select a file before submitting');
+      return;
+    }
     const formData = new FormData();
     formData.append('file', selectedFile);
     formData.append('upload_preset', 'xy1z3nqo');
