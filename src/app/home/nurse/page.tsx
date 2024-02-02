@@ -51,7 +51,7 @@ const Patient = () => {
           <Compo/>
         </div>
       </div>
-      <div className="w-full md:w-7/10 p-4">
+      <div className="w-full md:w-7/10 ">
         <input
           type="text"
           placeholder="Search..."
@@ -59,11 +59,14 @@ const Patient = () => {
           onChange={handleSearchChange}
           className="w-full p-2 mb-4 border border-gray-300 rounded"
         />
-        <div className="flex flex-wrap">
+        <div className="flex flex-wrap ">
           {filteredPatients.map((patient, index) => (
-            <div key={index} className="w-full">
+            <div key={index} className='p-5 m-0 md:w-1/4' >
+
               <h2 className="text-xl font-bold mb-2">{patient.name}</h2>
-              <div className={`card w-full m-2 md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 mb-4 hover:scale-125 rounded shadow-lg hover:shadow-xl transition-shadow duration-200 ease-in-out ${vibgyorColors[index % vibgyorColors.length]}`}>
+              <div className={`card w-full  p-4 mb-4
+               hover:scale-125 rounded shadow-lg hover:shadow-xl transition-shadow 
+               duration-200 ease-in-out ${vibgyorColors[index % vibgyorColors.length]}`}>
                 <p>Address: {patient.address}</p>
                 <p>Bed Number: {patient.bednumber}</p>
                 <p>Details: {patient.details}</p>

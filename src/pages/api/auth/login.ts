@@ -34,6 +34,7 @@ export default async function signin(req:NextApiRequest, res:NextApiResponse) {
         }
         else{
             console.log("user does not exist");
+            res.status(405).json({ message: 'User does not exist' });
         }
         return res.status(401).json({ message: 'Invalid email or password' });
     }

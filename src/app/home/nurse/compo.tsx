@@ -2,7 +2,10 @@ import React from 'react'
 
 const Compo = () => {
   return (
-    <div>Compo</div>
+    <div>Nurse details here
+
+
+    </div>
   )
 }
 

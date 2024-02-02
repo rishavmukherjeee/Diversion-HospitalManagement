@@ -37,6 +37,8 @@ export default function Login() {
       console.log(data);
     } catch (error) {
       console.log(error);
+      setLoading(false);
+      alert(error)
     }
 
 

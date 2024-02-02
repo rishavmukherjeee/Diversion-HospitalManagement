@@ -61,6 +61,10 @@ const Compo = () => {
       };
   return (
     <div> 
+      
+    <button onClick={gotofileupload}
+    className='bg-red-500 p-3 rounded-2xl text-white hover:bg-red-700 hover:text-white font-bold py-2 px-4 '
+    >Go to File upload</button>
         <form onSubmit={handleSubmit}>
     <label className='p-1 flex items-center'>
       Details:
@@ -88,9 +92,6 @@ const Compo = () => {
 
     </form>
     
-    <button onClick={gotofileupload}
-    className='bg-red-500 p-10'
-    >Go to File upload</button>
     </div>
   )
 }
