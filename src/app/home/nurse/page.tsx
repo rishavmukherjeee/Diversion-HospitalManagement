@@ -24,7 +24,7 @@ const Patient = () => {
     fetchData();
   }, []);
 
-  const handleSearchChange = (event) => {
+  const handleSearchChange = (event:any) => {
     setSearchTerm(event.target.value);
   };
   
