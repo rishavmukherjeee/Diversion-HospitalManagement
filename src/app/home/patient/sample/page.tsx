@@ -1,9 +1,9 @@
 "use client"
 import { useState } from 'react';
-
+import { useRouter } from 'next/navigation';
 export default function HFileup() {
   const [selectedFile, setSelectedFile] = useState();
-
+  const router=useRouter();
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
   };
@@ -21,8 +21,13 @@ export default function HFileup() {
       });
       const data = await response.json();
       console.log(data);
+      const urll=data.secure_url;
+      localStorage.setItem("urll",urll)
       if (data.secure_url) {
-        console.log('File successfully uploaded to Cloudinary:', data.secure_url);
+        console.log('File successfully uploaded to Cloudinary:', data.secure_url)
+        alert("File successfully uploaded to Cloudinary")
+        router.back()
+
       } else {
         console.log('Upload failed');
       }

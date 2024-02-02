@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 import jwt from 'jsonwebtoken';
-import Fileup from './fileup';
+import { useRouter } from 'next/navigation';
 const Compo = () => {
     
   let token:any ;
@@ -14,15 +14,11 @@ const Compo = () => {
     const [address, setAddress] = useState('');
     const [bednumber, setBednumber] = useState('');
     const [diet, setDiet] = useState('');
-    const patient = {
-        details: details,
-        drugsPrescribed: drugsPrescribed,
-        address: address,
-        bednumber: bednumber,
-        diet: diet,
-        name:decoded?.name
-      };
-      
+    
+      const router=useRouter()
+    const gotofileupload=()=>{
+      router.push('/home/patient/sample')
+    }
     const handleChange = (event:any) => {
         const target = event.target;
         const name = target.name;
@@ -38,6 +34,17 @@ const Compo = () => {
         setDiet(target.value);
       }
       const handleSubmit = async(event:any) => {
+        const urll=localStorage.getItem("urll");
+        localStorage.removeItem("urll");
+        const patient = {
+          details: details,
+          drugsPrescribed: drugsPrescribed,
+          address: address,
+          bednumber: bednumber,
+          diet: diet,
+          name:decoded?.name,
+          files:[urll]
+        };
 
         event.preventDefault();
         alert(JSON.stringify(patient));
@@ -75,10 +82,15 @@ const Compo = () => {
       Drugs Prescribed:
       <input placeholder='Drugs Here' className='ml-3 bg-transparent p-1' type="text" name="drugsPrescribed" value={drugsPrescribed} onChange={handleChange} />
     </label>
-    <Fileup/>
+
     <button className='bg-blue-500 mt-5 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
     type="submit">Submit</button>
+
     </form>
+    
+    <button onClick={gotofileupload}
+    className='bg-red-500 p-10'
+    >Go to File upload</button>
     </div>
   )
 }

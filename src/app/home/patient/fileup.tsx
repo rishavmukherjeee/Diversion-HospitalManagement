@@ -57,7 +57,7 @@ const Fileup = () => {
 };
 
 export default Fileup;
-*/
+
 import { useState } from 'react';
 
 export default function HFileup() {
@@ -100,3 +100,4 @@ export default function HFileup() {
     </div>
   );
 }
+*/

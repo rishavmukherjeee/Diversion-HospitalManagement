@@ -34,4 +34,5 @@ export  async function updatePatient(id: string, data: Partial<Patient>) {
     drugsPrescribed: string;
     ereports: string;
     vitalsLastCheck: string;
+    files:[string];
   }
