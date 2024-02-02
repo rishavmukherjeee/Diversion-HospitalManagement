@@ -3,10 +3,20 @@ import React, { useState, useEffect } from 'react';
 import Compo from './compo';
 import Image from 'next/image';
 
+interface Patient {
+  details: string;
+  drugsPrescribed: string;
+  address: string;
+  bednumber: string;
+  diet: string;
+  name: string;
+  files: string[];
+}
+
 const Patient = () => {
   
   const [searchTerm, setSearchTerm] = useState('');
-  const [patients, setPatients] = useState([]);
+  const [patients, setPatients] = useState<Patient[]>([]);
 
   const fetchData = async () => {
     const url = process.env.NEXT_PUBLIC_API_URL + '/api/controller/getallpatients';
@@ -16,7 +26,7 @@ const Patient = () => {
         'Content-Type': 'application/json',
       },
     });
-    const data = await res.json();
+    const data: Patient[] = await res.json();
     setPatients(data);
   };
 
@@ -24,7 +34,7 @@ const Patient = () => {
     fetchData();
   }, []);
 
-  const handleSearchChange = (event:any) => {
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
   };
   
