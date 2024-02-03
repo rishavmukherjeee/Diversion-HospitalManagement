@@ -3,7 +3,11 @@ import React, { useState, useEffect } from 'react';
 import Compo from './compo';
 import Image from 'next/image';
 import MedCompo from './medscompo';
+import { Modal, Button, Input,ModalHeader,  ModalBody, ModalFooter
+ } from  '@nextui-org/react';
+
 interface Patient {
+id:string;
 name: string;
 quantity: number;
 price: number;
@@ -16,7 +20,9 @@ const Patient = () => {
   
   const [searchTerm, setSearchTerm] = useState('');
   const [patients, setPatients] = useState<Patient[]>([]);
-
+const [id,setid]=useState('');
+  const [showModal, setShowModal] = useState(false); // State to control the visibility of the modal
+  const [quantity, setQuantity] = useState('');
   const fetchData = async () => {
     const url = process.env.NEXT_PUBLIC_API_URL + '/api/controller/getallmeds';
     const res = await fetch(url, {
@@ -41,7 +47,41 @@ const Patient = () => {
   patient.name.toLowerCase().includes(searchTerm.toLowerCase())
 ) : [];
 
-    
+const handleOpenModal = () => {
+  setShowModal(true);
+};
+
+const handleCloseModal = async() => {
+  setShowModal(false);
+  try{
+    const url= process.env.NEXT_PUBLIC_API_URL + '/api/controller/createmed';
+        const res= await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                },
+            body: JSON.stringify({id,quantity
+          }),
+        });
+        const data = await res.json();
+        console.log(data);
+      }
+        catch(err){
+            console.log(err);
+        }
+
+
+
+
+
+
+};
+const handleQuantityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  
+  setQuantity(event.target.value);
+}
+
+
   const vibgyorColors = ['bg-violet-500', 'bg-indigo-500', 'bg-blue-500', 'bg-green-500', 'bg-yellow-500', 'bg-orange-500', 'bg-red-500'];
   
   return (
@@ -66,9 +106,11 @@ const Patient = () => {
             <div key={index} className='p-5 m-0 md:w-1/4' >
 
               <h2 className="text-xl font-bold mb-2">{patient.name}</h2>
-              <div className={`card w-full  p-4 mb-4
+              
+              <div onClick={() => { handleOpenModal(); setid(patient.id); }} className={`card w-full  p-4 mb-4
                hover:scale-125 rounded shadow-lg hover:shadow-xl transition-shadow 
-               duration-200 ease-in-out ${vibgyorColors[index % vibgyorColors.length]}`}>
+               duration-200 ease-in-out ${vibgyorColors[index % vibgyorColors.length]}` 
+               }>
                 {patient.quantity && <p>quantity: {patient.quantity}</p>}
                 {patient.price && <p>Price: {patient.price}</p>}
                 {patient.description && <p>description: {patient.description}</p>}
@@ -76,6 +118,17 @@ const Patient = () => {
                 {patient.retailerId && <p>retailerId {patient.retailerId}</p>}
                 
               </div>
+              {showModal && (
+                <Modal onClose={handleCloseModal}>
+                  <ModalHeader>{patient.name}</ModalHeader>
+                  <ModalBody>
+                    <Input value={quantity} onChange={handleQuantityChange} placeholder="Enter quantity" />
+                  </ModalBody>
+                  <ModalFooter>
+                    <Button onClick={handleCloseModal}>Close</Button>
+                  </ModalFooter>
+                </Modal>
+      )}
             </div>
           ))}
         </div>

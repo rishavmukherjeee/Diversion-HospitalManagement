@@ -11,6 +11,9 @@ const Patient = () => {
   };
   
   // Replace this with your own data
+
+
+  
   const medicines:Medicines = {
     'Medicine 1': [
       { quantity: '10', retailer: 'Retailer 1', location: 'Location 1' },
