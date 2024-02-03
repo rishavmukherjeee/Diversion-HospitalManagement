@@ -67,6 +67,7 @@ const Compo = () => {
         });
         const data = await res.json();
         console.log(data);
+        alert(data)
       };
   return (
     <div> 

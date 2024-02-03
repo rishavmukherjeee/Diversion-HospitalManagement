@@ -31,6 +31,7 @@ const Patient = () => {
     });
     const data: Patient[] = await res.json();
     setPatients(data);
+    
   };
 
   useEffect(() => {
