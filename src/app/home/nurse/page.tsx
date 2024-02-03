@@ -64,7 +64,7 @@ const handlemodalclose = () => {
       <div className="w-full md:w-7/10  ">
         <input
           type="text"
-          placeholder="Search..."
+          placeholder="Search Patients..."
           value={searchTerm}
           onChange={handleSearchChange}
           className="w-full p-2 mt-2 mb-4 border  bg-slate-300 border-gray-300 rounded"

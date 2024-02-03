@@ -45,7 +45,7 @@ const Compo2 = () => {
         <div className=' mt-3 p-10'>
             {patient && (
                 <>
-                    {patient.address && <p>Address: {patient.address}</p>}
+                    {patient.address && <p>Ward No.: {patient.address}</p>}
                     {patient.bednumber && <p>Bed Number: {patient.bednumber}</p>}
                     {patient.details && <p>Details: {patient.details}</p>}
                     {patient.diet && <p>Diet: {patient.diet}</p>}
