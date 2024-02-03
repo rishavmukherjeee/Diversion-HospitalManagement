@@ -1,8 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import jwt from 'jsonwebtoken';
 import Image from 'next/image';
+
+interface Patient {
+    name: string;
+    details: string;
+    address: string;
+    bednumber: string;
+    diet: string;
+    drugsPrescribed: string;
+    files: string[];
+}
+
 const Compo2 = () => {
-    const [patient, setPatients] = useState([]);
+    const [patient, setPatient] = useState<Patient | null>(null);
 
     useEffect(() => {
         fetchData();
@@ -27,12 +38,13 @@ const Compo2 = () => {
             },
         });
         const data = await res.json();
-        setPatients(data);
+        setPatient(data);
     };
-
 
     return (
         <div>
+            {patient && (
+                <>
                     {patient.address && <p>Address: {patient.address}</p>}
                     {patient.bednumber && <p>Bed Number: {patient.bednumber}</p>}
                     {patient.details && <p>Details: {patient.details}</p>}
@@ -44,19 +56,10 @@ const Compo2 = () => {
                             <Image src={patient.files[0]} alt="Patient" width={500} height={300} priority />
                         </>
                     }
-                </div>
-          
+                </>
+            )}
+        </div>
     );
 };
 
 export default Compo2;
-
-interface Patient {
-    name: string;
-    details: string;
-    address: string;
-    bednumber: string;
-    diet: string;
-    drugsPrescribed: string;
-    files: string[];
-}
