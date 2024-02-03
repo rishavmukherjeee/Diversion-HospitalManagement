@@ -2,6 +2,8 @@
 import React, { useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { StateProvider } from './utils/store'
+import type { AppProps } from 'next/app'
 import { useRouter } from 'next/navigation';
 const db =async()=>{
   try{
@@ -35,6 +37,7 @@ const App = () => {
     }
   }, );
   return (
+    <StateProvider>
     <div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12"
      style={{backgroundImage: "url('/protrudingsquares.svg')",   }}>
       <div className="relative py-3 sm:max-w-xl sm:mx-auto">
@@ -87,6 +90,7 @@ const App = () => {
         </div>
       </div>
     </div>
+    </StateProvider>
     
     
   );

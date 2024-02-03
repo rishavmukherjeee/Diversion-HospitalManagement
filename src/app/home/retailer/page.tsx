@@ -106,7 +106,7 @@ const handleQuantityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
             <div key={index} className='p-5 m-0 md:w-1/4' >
 
               <h2 className="text-xl font-bold mb-2">{patient.name}</h2>
-              <button onClick={() => { handleOpenModal(); setid(patient.id); }}>
+              <Button onClick={() => { handleOpenModal(); setid(patient.id); }}>
               <div  className={`card w-full  p-4 mb-4
                hover:scale-125 rounded shadow-lg hover:shadow-xl transition-shadow 
                duration-200 ease-in-out ${vibgyorColors[index % vibgyorColors.length]}` 
@@ -118,7 +118,7 @@ const handleQuantityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
                 {patient.retailerId && <p>retailerId {patient.retailerId}</p>}
                 
               </div>
-              </button>
+              </Button>
               {showModal && (
                 <Modal onClose={handleCloseModal}>
                   <ModalHeader>{patient.name}</ModalHeader>

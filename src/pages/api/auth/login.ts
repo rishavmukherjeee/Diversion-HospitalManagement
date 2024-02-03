@@ -17,6 +17,7 @@ export default async function signin(req:NextApiRequest, res:NextApiResponse) {
              user = await prisma.user.findFirst({
                 where: {
                     email: email,
+                    role:'retailer'||'patient'||'nurse'
                 },
             });
         }
@@ -28,7 +29,7 @@ export default async function signin(req:NextApiRequest, res:NextApiResponse) {
             if(isPasswordValid) {
                 console.log("password is valid");
                 const secret = process.env.DB_SECRET;
-                const token = jwt.sign({ userId: user.id }, secret as string);
+                const token = jwt.sign({ userId: user.id,name:user.name, email:email, role:user.role }, secret as string);
                 return res.status(200).json({ token });
                 }
             else{

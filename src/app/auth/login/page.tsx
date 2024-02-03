@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import {useRouter}from 'next/navigation';
+
 async function log( email:string, password:string){
   console.log(process.env.NEXT_PUBLIC_API_URL);
   const url=process.env.NEXT_PUBLIC_API_URL+'/api/auth/login';
@@ -31,9 +32,10 @@ export default function Login() {
     try {
       setLoading(true);
       const data = await log(email,  password);
-      setLoading(false);
+      
       localStorage.setItem('token', data.token);
       router.push('/home/dashboard');
+      setLoading(false);
       console.log(data);
     } catch (error) {
       console.log(error);
@@ -46,7 +48,7 @@ export default function Login() {
     if(loading){
       return (
       <div className="flex items-center justify-center">
-      <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900"></div>
+      <div style={{backgroundImage: "url('/loading.svg')",}}></div>
     </div>);}
     else{
   return (

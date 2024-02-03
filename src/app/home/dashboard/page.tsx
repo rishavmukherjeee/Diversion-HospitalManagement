@@ -10,7 +10,9 @@ export default function Dashboard() {
     const router = useRouter();
     let token:any ;
     if (typeof window !== 'undefined') {
-    token= localStorage.getItem('token');}
+    token= localStorage.getItem('token');
+    console.log(token)
+}
     const logout = () => {
         localStorage.removeItem('token');
         window.localStorage.removeItem('token');
@@ -40,9 +42,8 @@ export default function Dashboard() {
                 </div>
             <button onClick={goto} className="px-4 py-2 font-bold text-white bg-green-500 rounded hover:bg-green-700">Go to {rolee} Homepage</button>
             </div>
-            <div className="mt-8 bg-white p-6 rounded shadow-md w-full md:w-1/2 lg:w-1/3">
-                <h2 className="text-lg font-bold mb-2">Token decoded</h2>
-                <pre className="p-4 text-sm bg-gray-200 rounded">{JSON.stringify(decoded, null, 2)}</pre>
+            <div className="mt-8 p-1 rounded shadow-md w-full md:w-1/2 lg:w-1/3 ">
+                <p>This is a website made with considerations for the ease of use for nurses, patients and Retailers. The project has IOT, Web3, Cloud implementation for fast data , M.L. models and various other useful things to make data safe secure fast and to make analysis regarding to the data</p>
             </div>
         </div>
     )
