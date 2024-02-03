@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { useStateValue } from '@/app/utils/store';
 async function sign(name:string, email:string,role:string, password:string){
   console.log(process.env.NEXT_PUBLIC_API_URL);
   const url=process.env.NEXT_PUBLIC_API_URL+'/api/auth/signin';
@@ -22,6 +23,13 @@ async function sign(name:string, email:string,role:string, password:string){
 }
 
 export default function Signin() {
+  const { state, dispatch } = useStateValue();
+  const startLoading = () => {
+    dispatch({ type: 'START_LOADING' });
+  };
+  const stopLoading = () => {
+    dispatch({ type: 'STOP_LOADING' });
+  };
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -30,6 +38,7 @@ export default function Signin() {
 
   const handleSubmit = async(e:any) => {
     e.preventDefault();
+    startLoading()
     if(name.length>0 && email.length>0 && password.length>0 && role.length>0){
       if(role=="patient" || role=="nurse" || role=="retailer"){
     try {
@@ -37,7 +46,9 @@ export default function Signin() {
       localStorage.setItem('token', data.token);
       console.log(data);
       console.log(data.token);
+      stopLoading()
       router.push('/home/dashboard');
+
     } catch (error) {
       console.log(error);
     }}

@@ -1,7 +1,9 @@
 import React, { createContext, useReducer, useContext, ReactNode } from 'react';
+import LoadingScreen from './loadingscreen'
 
 interface State {
-  // Define your state interface here
+  loading: boolean;
+  // Define your other state interfaces here
 }
 
 interface Action {
@@ -10,7 +12,8 @@ interface Action {
 }
 
 const initialState: State = {
-  // Initialize your state here
+  loading: false,
+  // Initialize your other states here
 };
 
 const StateContext = createContext<{
@@ -23,11 +26,17 @@ const StateContext = createContext<{
 
 const reducer = (state: State, action: Action) => {
   switch (action.type) {
-    case 'ACTION_TYPE':
+    case 'START_LOADING':
       return {
         ...state,
-        // update state here
+        loading: true,
       };
+    case 'STOP_LOADING':
+      return {
+        ...state,
+        loading: false,
+      };
+    // Handle other actions here
     default:
       throw new Error(`Unknown action: ${action.type}`);
   }
@@ -38,7 +47,7 @@ export const StateProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <StateContext.Provider value={{ state, dispatch }}>
-      {children}
+      {state.loading ? <LoadingScreen /> : children}
     </StateContext.Provider>
   );
 };

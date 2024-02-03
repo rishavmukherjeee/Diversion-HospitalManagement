@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import {useRouter}from 'next/navigation';
+import { useStateValue } from '@/app/utils/store';
 
 async function log( email:string, password:string){
   console.log(process.env.NEXT_PUBLIC_API_URL);
@@ -22,35 +23,37 @@ async function log( email:string, password:string){
 }
 
 export default function Login() {
+  
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false); // [1]
+  //const [loading, setLoading] = useState(false); // [1]
   const router = useRouter();
-  
+  const { state, dispatch } = useStateValue();
+  const startLoading = () => {
+    dispatch({ type: 'START_LOADING' });
+  };
+  const stopLoading = () => {
+    dispatch({ type: 'STOP_LOADING' });
+  };
   const handleSubmit = async(e:any) => {
     e.preventDefault();
     try {
-      setLoading(true);
+      startLoading()
       const data = await log(email,  password);
       
       localStorage.setItem('token', data.token);
       router.push('/home/dashboard');
-      setLoading(false);
+      stopLoading()
       console.log(data);
     } catch (error) {
       console.log(error);
-      setLoading(false);
+      stopLoading()
       alert(error)
     }
 
 
   };
-    if(loading){
-      return (
-      <div className="flex items-center justify-center">
-      <div style={{backgroundImage: "url('/loading.svg')",}}></div>
-    </div>);}
-    else{
+   
   return (
 
     <div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12"
@@ -93,5 +96,5 @@ export default function Login() {
       </div>
     </div>
   );
-    }
+    
 }

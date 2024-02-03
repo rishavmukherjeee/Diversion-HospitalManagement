@@ -17,7 +17,6 @@ export default async function signin(req:NextApiRequest, res:NextApiResponse) {
              user = await prisma.user.findFirst({
                 where: {
                     email: email,
-                    role:'retailer'||'patient'||'nurse'
                 },
             });
         }
