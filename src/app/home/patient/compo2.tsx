@@ -42,7 +42,7 @@ const Compo2 = () => {
     };
 
     return (
-        <div>
+        <div className=' mt-3 p-10'>
             {patient && (
                 <>
                     {patient.address && <p>Address: {patient.address}</p>}

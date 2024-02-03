@@ -63,7 +63,7 @@ export default function Signin() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12"
+    <div className="min-h-screen bg-gray-100 py-6 flex  justify-center sm:py-12"
      style={{backgroundImage: "url('/protrudingsquares.svg')",   }}>
       
       <div className="w-full sm:w-1/2 p-8">

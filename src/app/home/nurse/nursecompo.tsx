@@ -16,7 +16,7 @@ const NurseCompo = () => {
       
 {//decoded?.userId && <p>Token Decoded: {decoded.userId}</p>
 }
-{decoded?.name&&<p className=' text-green-600 font-extrabold'>Hello, {decoded.name}</p>}
+{decoded?.name&&<p className=' text-black text-2xl font-extrabold'>Hello, {decoded.name}</p>}
 {decoded?.location&&<p>Location: {decoded.location}</p>}
     
     </div>

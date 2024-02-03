@@ -16,7 +16,7 @@ const Compo = () => {
       
 {//decoded?.userId && <p>Token Decoded: {decoded.userId}</p>
 }
-{decoded?.name&&<p className=' text-green-600 font-extrabold'>Hello, {decoded.name}</p>}
+{decoded?.name&&<p className=' text-blue-600 text-3xl font-extrabold'>Hello, {decoded.name}</p>}
 {decoded?.location&&<p>Location: {decoded.location}</p>}
     
     </div>

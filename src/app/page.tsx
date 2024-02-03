@@ -73,13 +73,13 @@ const App = () => {
               </div>
               <div className="pt-4 flex items-center space-x-4">
                 <Link className="flex justify-center items-center w-full text-white px-4 py-3 
-                  rounded-md focus:outline-none bg-green-500 hover:bg-green-700 hover:shadow-lg"
+                  rounded-md focus:outline-none bg-green-700 hover:bg-green-900 hover:shadow-lg"
                   href='/auth/login'>
                   <button onClick={db} >Log in</button>
                   </Link>
                    <Link 
                   className="flex justify-center items-center w-full text-white px-4 py-3
-                   rounded-md focus:outline-none bg-red-500 hover:bg-red-700 hover:shadow-lg"
+                   rounded-md focus:outline-none bg-blue-500 hover:bg-blue-700 hover:shadow-lg"
                     href="/auth/sign"> 
                    <button onClick={db} >Sign up</button>
 

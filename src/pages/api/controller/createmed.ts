@@ -8,6 +8,7 @@ export default async function handle(req:NextApiRequest, res:NextApiResponse) {
         name,
         quantity,
         price,
+        description,
         nextRefill,
       } = req.body;
       console.log("serverr");
@@ -16,6 +17,7 @@ export default async function handle(req:NextApiRequest, res:NextApiResponse) {
           name,
           quantity,
           price,
+          description,
           nextRefill,
         },
 

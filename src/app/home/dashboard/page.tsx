@@ -43,8 +43,8 @@ export default function Dashboard() {
             <button onClick={goto} className="px-4 py-2 font-bold text-white bg-green-500 rounded hover:bg-green-700">Go to {rolee} Homepage</button>
             </div>
             <div className="mt-8 p-1 rounded shadow-md w-full md:w-1/2 lg:w-1/3 ">
-                <p>This is a website made with considerations for the ease of use for nurses, patients and Retailers. The project has IOT, Web3, Cloud implementation for fast data , M.L. models and various other useful things to make data safe secure fast and to make analysis regarding to the data</p>
-            </div>
+                <p>This is a website made with considerations for the ease of use for nurses, patients and Retailers. </p>
+                      </div>
         </div>
     )
 }

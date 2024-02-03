@@ -82,10 +82,10 @@ const handleQuantityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 }
 
 
-  const vibgyorColors = ['bg-violet-500', 'bg-indigo-500', 'bg-blue-500', 'bg-green-500', 'bg-yellow-500', 'bg-orange-500', 'bg-red-500'];
+  const vibgyorColors = ['bg-violet-500', 'bg-indigo-500', 'bg-blue-500'];
   
   return (
-    <div className="flex flex-col md:flex-row">
+    <div className="flex flex-col bg-white  md:flex-row">
       <div className='flex'>
         <div className="w-full p-4 ">
           <Compo/>
@@ -100,15 +100,15 @@ const handleQuantityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
           placeholder="Search..."
           value={searchTerm}
           onChange={handleSearchChange}
-          className=" w-full p-2 mb-4 border bg-black mt-2 border-gray-300 rounded"
+          className=" w-full p-2  mb-4 border bg-slate-300 mt-6 border-gray-300 rounded"
         />
         <div className="flex flex-wrap ">
           {filteredPatients.map((patient, index) => (
             <div key={index} className='p-5 m-0 md:w-1/4' >
 
-              <h2 className="text-xl font-bold mb-2">{patient.name}</h2>
+              <h2 className=" text-black text-2xl font-bold mb-2">{patient.name}</h2>
               <Button onClick={() => { handleOpenModal(); setid(patient.id); }}>
-              <div  className={`card w-full  p-4 mb-4
+              <div  className={`card w-full  p-4 mb-4 
                hover:scale-125 rounded shadow-lg hover:shadow-xl transition-shadow 
                duration-200 ease-in-out ${vibgyorColors[index % vibgyorColors.length]}` 
                }>
@@ -133,8 +133,10 @@ const handleQuantityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       )}
             </div>
           ))}
+          
         </div>
       </div>
+
     </div>
   );
 }
