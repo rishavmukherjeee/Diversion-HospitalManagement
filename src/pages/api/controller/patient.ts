@@ -18,10 +18,15 @@ export  async function updatePatient(id: string, data: Partial<Patient>) {
     }
   }
   export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+    try{
     const { id } = req.query;
     const patientId = id as string;
     const updatedPatient = await updatePatient(patientId, req.body);
     res.status(200).json(updatedPatient);
+    }
+    catch(e){
+      console.log("error ",e)
+    }
   }
 
   type Patient = {

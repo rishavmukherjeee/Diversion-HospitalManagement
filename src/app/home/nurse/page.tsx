@@ -1,9 +1,12 @@
 "use client"
 import React, { useState, useEffect } from 'react';
-import Compo from './compo';
 import Image from 'next/image';
-
+import NurseCompo from './nursecompo';
+import { useRouter } from 'next/navigation';
+import {  Button, 
+} from  '@nextui-org/react';
 interface Patient {
+  id: string;
   details: string;
   drugsPrescribed: string;
   address: string;
@@ -14,7 +17,7 @@ interface Patient {
 }
 
 const Patient = () => {
-  
+  const router = useRouter();
   const [searchTerm, setSearchTerm] = useState('');
   const [patients, setPatients] = useState<Patient[]>([]);
 
@@ -33,7 +36,12 @@ const Patient = () => {
   useEffect(() => {
     fetchData();
   }, []);
+const handlemodalopen = () => {
 
+}
+const handlemodalclose = () => {
+
+}
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
   };
@@ -48,7 +56,8 @@ const Patient = () => {
     <div className="flex flex-col md:flex-row ">
       <div className='flex'>
         <div className="w-full p-4 ">
-          <Compo/>
+          
+          <NurseCompo/>
         </div>
       </div>
       <div className="w-full md:w-7/10  ">
@@ -59,14 +68,20 @@ const Patient = () => {
           onChange={handleSearchChange}
           className="w-full p-2 mb-4 border bg-black border-gray-300 rounded"
         />
+        
         <div className="flex flex-wrap ">
+          
           {filteredPatients.map((patient, index) => (
             <div key={index} className='p-5 m-0 md:w-1/4' >
 
               <h2 className="text-xl font-bold mb-2">{patient.name}</h2>
+              
+        <Button  onClick={() => {localStorage.setItem('clicked',patient.id);
+      router.push('/home/nurse/slug') }}>
               <div className={`card w-full  p-4 mb-4
                hover:scale-125 rounded shadow-lg hover:shadow-xl transition-shadow 
                duration-200 ease-in-out ${vibgyorColors[index % vibgyorColors.length]}`}>
+                <p>Click to add or update data</p>
                 {patient.address && <p>Address: {patient.address}</p>}
                 {patient.bednumber && <p>Bed Number: {patient.bednumber}</p>}
                 {patient.details && <p>Details: {patient.details}</p>}
@@ -80,8 +95,12 @@ const Patient = () => {
                   </>
                   }
               </div>
+                  
+          </Button>
             </div>
           ))}
+          
+        
         </div>
       </div>
     </div>

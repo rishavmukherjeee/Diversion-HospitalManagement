@@ -1,24 +1,31 @@
+"use client"
 import React,{useState} from 'react'
-import jwt from 'jsonwebtoken';
 import { useRouter } from 'next/navigation';
 const Compo = () => {
-    
-  let token:any ;
-  if (typeof window !== 'undefined') {
-    token= localStorage.getItem('token');}
-    let decoded:any;
-    decoded = jwt.decode(token);
-    console.log(decoded?.userId);
-    const [details, setDetails] = useState('');
-    const [drugsPrescribed, setDrugsPrescribed] = useState('');
-    const [address, setAddress] = useState('');
-    const [bednumber, setBednumber] = useState('');
-    const [diet, setDiet] = useState('');
-    
-      const router=useRouter()
-    const gotofileupload=()=>{
-      router.push('/home/patient/sample')
+  
+
+  const router = useRouter();
+  async function gettid(){
+    let id:any ;
+    if (typeof window !== 'undefined') {
+      id= await localStorage.getItem('clicked');
+    localStorage.removeItem('clicked');
     }
+    console.log(id)
+    return id;
+  }
+
+    
+  
+  const [details, setDetails] = useState('');
+  const [drugsPrescribed, setDrugsPrescribed] = useState('');
+  const [address, setAddress] = useState('');
+  const [bednumber, setBednumber] = useState('');
+  const [diet, setDiet] = useState('');
+
+  const gotofileupload = () => {
+    router.push('/home/nurse/sample');
+  };
     const handleChange = (event:any) => {
         const target = event.target;
         const name = target.name;
@@ -42,13 +49,15 @@ const Compo = () => {
           address: address,
           bednumber: bednumber,
           diet: diet,
-          name:decoded?.name,
           files:[urll]
         };
 
+
         event.preventDefault();
         alert(JSON.stringify(patient));
-        const url= process.env.NEXT_PUBLIC_API_URL + '/api/controller/patient?id='+decoded?.userId
+        const op=localStorage.getItem('clicked');
+        const url= process.env.NEXT_PUBLIC_API_URL + '/api/controller/patient?id='+op
+        console.log(url);
         const res= await fetch(url, {
             method: 'PUT',
             headers: {
