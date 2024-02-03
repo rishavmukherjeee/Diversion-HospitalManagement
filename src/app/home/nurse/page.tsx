@@ -45,19 +45,19 @@ const Patient = () => {
   const vibgyorColors = ['bg-violet-500', 'bg-indigo-500', 'bg-blue-500', 'bg-green-500', 'bg-yellow-500', 'bg-orange-500', 'bg-red-500'];
   
   return (
-    <div className="flex flex-col md:flex-row">
+    <div className="flex flex-col md:flex-row ">
       <div className='flex'>
         <div className="w-full p-4 ">
           <Compo/>
         </div>
       </div>
-      <div className="w-full md:w-7/10 ">
+      <div className="w-full md:w-7/10  ">
         <input
           type="text"
           placeholder="Search..."
           value={searchTerm}
           onChange={handleSearchChange}
-          className="w-full p-2 mb-4 border border-gray-300 rounded"
+          className="w-full p-2 mb-4 border bg-black border-gray-300 rounded"
         />
         <div className="flex flex-wrap ">
           {filteredPatients.map((patient, index) => (

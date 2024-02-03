@@ -89,9 +89,10 @@ const handleQuantityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       <div className='flex'>
         <div className="w-full p-4 ">
           <Compo/>
+          <MedCompo/>
         </div>
       </div>
-      <MedCompo/>
+      
       <div className="w-full md:w-7/10 ">
 
         <input
@@ -99,7 +100,7 @@ const handleQuantityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
           placeholder="Search..."
           value={searchTerm}
           onChange={handleSearchChange}
-          className="w-full p-2 mb-4 border border-gray-300 rounded"
+          className=" w-full p-2 mb-4 border bg-black mt-2 border-gray-300 rounded"
         />
         <div className="flex flex-wrap ">
           {filteredPatients.map((patient, index) => (
