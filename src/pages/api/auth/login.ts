@@ -30,9 +30,12 @@ export default async function signin(req:NextApiRequest, res:NextApiResponse) {
                 const secret = process.env.DB_SECRET;
                 const token = jwt.sign({ userId: user.id }, secret as string);
                 return res.status(200).json({ token });
+                }
+            else{
+                return res.status(401).json({ message: 'Invalid email or password' });
+                }
             }
-        }
-        else{
+        else{   
             console.log("user does not exist");
             res.status(405).json({ message: 'User does not exist' });
         }

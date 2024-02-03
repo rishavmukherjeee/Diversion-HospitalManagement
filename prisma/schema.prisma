@@ -49,11 +49,15 @@ model Nurse {
 }
 
 model Medicine {
-  id         String    @id @default(auto()) @map("_id") @db.ObjectId
-  name       String?
-  quantity   Int?
-  retailerId String?   @db.ObjectId
-  retailer   Retailer? @relation(fields: [retailerId], references: [id])
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  name        String?
+  quantity    String?
+  price       String?
+  description String?
+  nextRefill  String?
+  retailerNo  String?
+  retailerId  String?   @db.ObjectId
+  retailer    Retailer? @relation(fields: [retailerId], references: [id])
 }
 
 model Retailer {
@@ -77,4 +81,6 @@ model Hospital {
 model Shop {
   id        String     @id @default(auto()) @map("_id") @db.ObjectId
   retailers Retailer[]
+  location  String?
+  name      String?
 }

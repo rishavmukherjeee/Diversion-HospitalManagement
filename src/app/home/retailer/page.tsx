@@ -2,15 +2,14 @@
 import React, { useState, useEffect } from 'react';
 import Compo from './compo';
 import Image from 'next/image';
-
+import MedCompo from './medscompo';
 interface Patient {
-  details: string;
-  drugsPrescribed: string;
-  address: string;
-  bednumber: string;
-  diet: string;
-  name: string;
-  files: string[];
+name: string;
+quantity: number;
+price: number;
+description: string;
+nextRefill: string;
+retailerId: string;
 }
 
 const Patient = () => {
@@ -19,7 +18,7 @@ const Patient = () => {
   const [patients, setPatients] = useState<Patient[]>([]);
 
   const fetchData = async () => {
-    const url = process.env.NEXT_PUBLIC_API_URL + '/api/controller/getallpatients';
+    const url = process.env.NEXT_PUBLIC_API_URL + '/api/controller/getallmeds';
     const res = await fetch(url, {
       method: 'GET',
       headers: {
@@ -38,9 +37,10 @@ const Patient = () => {
     setSearchTerm(event.target.value);
   };
   
-  const filteredPatients = patients.filter((patient) =>
-    patient.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredPatients = Array.isArray(patients) ? patients.filter((patient) =>
+  patient.name.toLowerCase().includes(searchTerm.toLowerCase())
+) : [];
+
     
   const vibgyorColors = ['bg-violet-500', 'bg-indigo-500', 'bg-blue-500', 'bg-green-500', 'bg-yellow-500', 'bg-orange-500', 'bg-red-500'];
   
@@ -51,7 +51,9 @@ const Patient = () => {
           <Compo/>
         </div>
       </div>
+      <MedCompo/>
       <div className="w-full md:w-7/10 ">
+
         <input
           type="text"
           placeholder="Search..."
@@ -67,18 +69,12 @@ const Patient = () => {
               <div className={`card w-full  p-4 mb-4
                hover:scale-125 rounded shadow-lg hover:shadow-xl transition-shadow 
                duration-200 ease-in-out ${vibgyorColors[index % vibgyorColors.length]}`}>
-                {patient.address && <p>Address: {patient.address}</p>}
-                {patient.bednumber && <p>Bed Number: {patient.bednumber}</p>}
-                {patient.details && <p>Details: {patient.details}</p>}
-                {patient.diet && <p>Diet: {patient.diet}</p>}
-                {patient.drugsPrescribed && <p>Drugs Prescribed: {patient.drugsPrescribed}</p>}
-                {patient.files && patient.files.length > 0 && 
-                <>
-
-                <p>Files:</p>
-                  <Image src={patient.files[0]} alt="Patient" width={500} height={300} priority/>
-                  </>
-                  }
+                {patient.quantity && <p>quantity: {patient.quantity}</p>}
+                {patient.price && <p>Price: {patient.price}</p>}
+                {patient.description && <p>description: {patient.description}</p>}
+                {patient.nextRefill && <p>nextRefill: {patient.nextRefill}</p>}
+                {patient.retailerId && <p>retailerId {patient.retailerId}</p>}
+                
               </div>
             </div>
           ))}
