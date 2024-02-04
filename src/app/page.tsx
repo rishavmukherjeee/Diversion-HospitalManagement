@@ -57,11 +57,11 @@ const App = () => {
                 </div>
                 <div className="flex flex-row  justify-center pb-3">
               
-            <h2 className="leading-relaxed">Hospital Management System</h2>
+            <h2 className="leading-relaxed">Visionary Diagonostics</h2>
                 </div>
             <div className="flex space-x-5">
                 <p className="text-sm text-gray-500 font-normal leading-relaxed">
-                  This is a hospital management system made in mind to make nurses and doctors work easier. 
+                  This is a Visionary Diagonostics made in mind to make nurses and doctors work easier. 
                   Inlcluding retailing of drugs, keeping track of patients, doctors, and other staffs.
                   It also implements some Machine Learning models.
                   </p>

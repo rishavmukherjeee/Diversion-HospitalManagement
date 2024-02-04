@@ -76,7 +76,7 @@ export default function Signin() {
                           width={150}
                           height={150}
                       />
-                      <h1 className="text-3xl text-black hover:text-orange-700 font-bold mb-8">Hospital Management System</h1>
+                      <h1 className="text-3xl text-black hover:text-orange-700 font-bold mb-8">Visionary Diagonostics</h1>
                   </div>
                   <div className="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
                 
